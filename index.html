@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sumedha! ❤️ | 8 Years of Us</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #e63946;
+            --primary-hover: #c1121f;
+            --rose: #ff4d6d;
+            --rose-light: #ff758f;
+            --rose-bg: #fff0f3;
+            --blush: #ffe5ec;
+            --gold: #d4a373;
+            --gold-glow: rgba(212, 163, 115, 0.4);
+            --text-dark: #370617;
+            --text-muted: #6a040f;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(255, 255, 255, 0.7);
+            --shadow-soft: 0 12px 35px rgba(230, 57, 70, 0.12);
+            --shadow-card: 0 15px 35px rgba(89, 13, 34, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top center, #fff5f7 0%, #ffe3ea 60%, #ffd0dc 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px 80px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background hearts canvas */
+        #hearts-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        /* Music Floating Toggle */
+        .music-pill {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--rose-light);
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .music-pill:hover {
+            transform: scale(1.05);
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.3);
+        }
+
+        .music-pill.playing {
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 77, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
+
+        /* Romantic Header */
+        .hero-section {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff758f, #e63946);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Alex Brush', cursive;
+            font-size: 4rem;
+            line-height: 1.15;
+            color: var(--primary);
+            text-shadow: 2px 3px 6px rgba(230, 57, 70, 0.15);
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* Glassmorphism Card standard */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--card-border);
+            padding: 26px 24px;
+            width: 100%;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 20px 40px rgba(89, 13, 34, 0.12);
+        }
+
+        /* Featured Polaroid Showcase */
+        .showcase-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .polaroid-frame {
+            background: #ffffff;
+            padding: 16px 16px 42px 16px;
+            border-radius: 10px;
+            box-shadow: 0 16px 36px rgba(89, 13, 34, 0.2), 0 2px 6px rgba(0,0,0,0.06);
+            position: relative;
+            max-width: 380px;
+            width: 100%;
+            transform: rotate(-1.5deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 0 22px 48px rgba(89, 13, 34, 0.25);
+        }
+
+        /* Washi tape visual detail */
+        .polaroid-frame::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 24px;
+            background: rgba(255, 182, 193, 0.65);
+            backdrop-filter: blur(2px);
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 6px;
+            background-color: var(--blush);
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .polaroid-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: #2b0914;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        .polaroid-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 1px solid var(--rose-light);
+            color: var(--primary);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .photo-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ffb3c1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* 8-Year Counter Grid */
+        .counter-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .counter-header p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .counter-box {
+            background: linear-gradient(145deg, #ff4d6d, #c9184a);
+            color: white;
+            padding: 14px 6px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(201, 24, 74, 0.25);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .counter-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .counter-box span {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .counter-box small {
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Interactive Birthday Cake */
+        .cake-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .cake-visual {
+            font-size: 4rem;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+
+        .cake-visual:hover {
+            transform: scale(1.08);
+        }
+
+        .candle-flame {
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 20px;
+            background: radial-gradient(circle at bottom, #ffea00 20%, #ff7700 80%, transparent 100%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 18px #ffaa00, 0 0 35px #ff5500;
+            animation: flicker 0.6s infinite alternate;
+            transition: opacity 0.4s ease;
+        }
+
+        .candle-flame.extinguished {
+            opacity: 0;
+            animation: none;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) rotate(-2deg) scale(1); }
+            50% { transform: translateX(-50%) rotate(3deg) scale(1.08); }
+            100% { transform: translateX(-50%) rotate(-1deg) scale(0.95); }
+        }
+
+        #cake-status {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Memory Lane Scrapbook Grid */
+        .gallery-header {
+            margin-bottom: 20px;
+        }
+
+        .gallery-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            color: var(--primary);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .thumb-polaroid {
+            background: white;
+            padding: 8px 8px 18px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(89, 13, 34, 0.12);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            text-align: center;
+        }
+
+        .thumb-polaroid:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 12px 26px rgba(89, 13, 34, 0.22);
+            z-index: 2;
+        }
+
+        .thumb-polaroid img {
+            width: 100%;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 4px;
+            background-color: var(--blush);
+            display: block;
+        }
+
+        .thumb-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            color: #370617;
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Reasons I Adore You Box */
+        .reason-box {
+            background: rgba(255, 240, 243, 0.8);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin: 18px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--text-dark);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* Secret Birthday Letter & Envelope */
+        .envelope-container {
+            margin-top: 10px;
+        }
+
+        .envelope-card {
+            background: linear-gradient(135deg, #fff, #ffebee);
+            border: 2px dashed var(--rose-light);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .envelope-card:hover {
+            border-color: var(--primary);
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .wax-seal {
+            width: 58px;
+            height: 58px;
+            background: radial-gradient(circle, #e63946, #9b2226);
+            color: #ffe5ec;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            box-shadow: 0 6px 16px rgba(155, 34, 38, 0.4);
+            animation: pulse-seal 2.5s infinite;
+        }
+
+        @keyframes pulse-seal {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        #letter-content {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+            padding: 24px 20px;
+            background: #fffdfa;
+            border: 1px solid #f1e3d3;
+            border-radius: 12px;
+            box-shadow: inset 0 0 30px rgba(212, 163, 115, 0.08);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #2b0914;
+            animation: unfoldLetter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes unfoldLetter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .signature {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-top: 15px;
+            display: block;
+            text-align: right;
+        }
+
+        /* Buttons */
+        .btn-romantic {
+            background: linear-gradient(135deg, #ff4d6d 0%, #e63946 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+            transition: all 0.25s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-romantic:hover {
+            background: linear-gradient(135deg, #c9184a 0%, #9b2226 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.45);
+        }
+
+        .btn-romantic:active {
+            transform: translateY(0);
+        }
+
+        .btn-romantic.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-romantic.outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Modern Dialog for Fullscreen Photo Lightbox */
+        dialog:modal {
+            overscroll-behavior: contain;
+            border: none;
+            border-radius: 20px;
+            padding: 0;
+            background: transparent;
+            max-width: 90vw;
+            max-height: 90vh;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            margin: auto;
+        }
+
+        dialog::backdrop {
+            background: rgba(43, 9, 20, 0.75);
+            backdrop-filter: blur(8px);
+            overflow: hidden;
+            overscroll-behavior: contain;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 16px 16px 24px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 520px;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 68vh;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .modal-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 14px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(230, 57, 70, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 540px) {
+            h1 { font-size: 3.2rem; }
+            .subtitle { font-size: 1.15rem; }
+            .counter-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .polaroid-frame img { height: 290px; }
+            .music-pill span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for smooth floating romantic hearts -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- Floating Background Music Player -->
+    <button class="music-pill" id="musicBtn" onclick="toggleRomanticMusic()" title="Play / Pause Romantic Melody">
+        <span id="musicIcon">🎵</span>
+        <span id="musicText">Romantic Melody</span>
+    </button>
+
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <header class="hero-section">
+            <span class="badge">Happy 8th Anniversary & Birthday 🎂</span>
+            <h1>Happy Birthday, Sumedha!</h1>
+            <p class="subtitle">Celebrating You, Your Beautiful Smile & Our 8 Precious Years ❤️</p>
+        </header>
+
+        <!-- Main Featured Polaroid with Photo Switcher -->
+        <div class="showcase-container">
+            <div class="polaroid-frame" id="featuredPolaroid" onclick="nextPhoto()" title="Click to see next photo">
+                <img id="mainPhoto" src="photo2.jpg" alt="Sumedha & Sudipto Together" onerror="this.src='couple.jpg'">
+                <div class="polaroid-caption" id="mainCaption">8 Years of Pure Love ✨</div>
+            </div>
+
+            <!-- Polaroid Navigation Controls -->
+            <div class="polaroid-nav">
+                <button class="nav-btn" onclick="prevPhoto()" aria-label="Previous Memory">❮</button>
+                <div class="photo-dots" id="dotsContainer">
+                    <!-- Dots generated by JS -->
+                </div>
+                <button class="nav-btn" onclick="nextPhoto()" aria-label="Next Memory">❯</button>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;">(Tap photo or arrows to explore our memories)</p>
+        </div>
+
+        <!-- Interactive Birthday Cake & Wish -->
+        <div class="glass-card">
+            <div class="cake-container">
+                <div class="cake-visual" onclick="blowCandle()" title="Tap to blow the candle!">
+                    <div class="candle-flame" id="candleFlame"></div>
+                    🎂
+                </div>
+                <h3 id="cake-status">Make a Birthday Wish, Sumedha! 🕯️</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 420px;">
+                    Close your eyes, think of your sweetest dream, and blow out the candle below:
+                </p>
+                <button class="btn-romantic" id="blowBtn" onclick="blowCandle()">
+                    <span>Blow Out The Candle 💨</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 8-Year Milestone Counter -->
+        <div class="glass-card">
+            <div class="counter-header">
+                <h2>Our 8-Year Milestone</h2>
+                <p>2,922 days of laughter, warmth, and growing together</p>
+            </div>
+            <div class="counter-grid">
+                <div class="counter-box">
+                    <span>8</span>
+                    <small>Years</small>
+                </div>
+                <div class="counter-box">
+                    <span>96</span>
+                    <small>Months</small>
+                </div>
+                <div class="counter-box">
+                    <span id="liveDays">2,922</span>
+                    <small>Days</small>
+                </div>
+                <div class="counter-box">
+                    <span>∞</span>
+                    <small>Memories</small>
+                </div>
+            </div>
+            <div style="margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); font-style: italic;">
+                ... and falling in love with you all over again, every single day.
+            </div>
+        </div>
+
+        <!-- Memory Lane Scrapbook Gallery (All 6 photos) -->
+        <div class="glass-card">
+            <div class="gallery-header">
+                <h2>Our Cherished Memories 📸</h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Snapshots from our journey together (Tap any to view)</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="thumb-polaroid" onclick="openLightbox(0)">
+                    <img src="photo1.jpg" alt="Memory 1" loading="lazy">
+                    <div class="thumb-caption">Sweetest Smile 💖</div>
+                </div>
+                <div class="thumb-polaroid" onclick="openLightbox(1)">
+                    <img src="photo2.jpg" alt="Memory 2" loading="lazy">
+                    <div class="thumb-caption">Us Together ✨</div>
+                </div>
+                <div class="thumb-polaroid" onclick="openLightbox(2)">
+                    <img src="photo3.jpg" alt="Memory 3" loading="lazy">
+                    <div class="thumb-caption">Pure Joy 🌸</div>
+                </div>
+                <div class="thumb-polaroid" onclick="openLightbox(3)">
+                    <img src="photo4.jpg" alt="Memory 4" loading="lazy">
+                    <div class="thumb-caption">My Favorite Person 💑</div>
+                </div>
+                <div class="thumb-polaroid" onclick="openLightbox(4)">
+                    <img src="photo5.jpg" alt="Memory 5" loading="lazy">
+                    <div class="thumb-caption">Warmth & Peace ☀️</div>
+                </div>
+                <div class="thumb-polaroid" onclick="openLightbox(5)">
+                    <img src="photo6.jpg" alt="Memory 6" loading="lazy">
+                    <div class="thumb-caption">Forever Ahead 🥂</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reasons Why I Adore You Generator -->
+        <div class="glass-card">
+            <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--primary);">
+                Why I Adore You ✨
+            </h2>
+            <div class="reason-box" id="reasonBox">
+                "Click the button below to uncover just one of the infinite reasons you hold my heart..."
+            </div>
+            <button class="btn-romantic outline" onclick="nextReason()">
+                <span>Tell Me Another Reason 💌</span>
+            </button>
+        </div>
+
+        <!-- Secret Birthday Letter from Sudipto -->
+        <div class="glass-card envelope-container">
+            <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--primary); margin-bottom: 6px;">
+                A Letter Just For You 💌
+            </h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+                Written straight from the heart
+            </p>
+
+            <div class="envelope-card" id="envelopeCard" onclick="openLetter()">
+                <div class="wax-seal">❤️</div>
+                <h4 style="font-weight: 600; color: var(--primary); font-size: 1.15rem;">Tap to Break the Seal & Open</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">A private birthday message from Sudipto</p>
+            </div>
+
+            <article id="letter-content">
+                <p style="font-weight: 700; font-size: 1.45rem; color: var(--primary); margin-bottom: 12px;">Dearest Sumedha,</p>
+                <p>Happy Birthday, my love! 🎂❤️</p><br>
+                <p>Looking back at these past 8 incredible years, my heart fills with endless gratitude. From our early days filled with quiet giggles and shy glances to conquering life’s every challenge side by side, having you with me has been life's greatest blessing.</p><br>
+                <p>You are my steady comfort on anxious days, my loudest cheerleader, and my very best friend. The gentle kindness you show to everyone around you and that radiant glow when you smile never fails to melt my heart—even after 2,900+ days.</p><br>
+                <p>On your special day, I wish for all your deepest wishes to blossom into reality. May this year shower you with success, good health, peace, and boundless laughter.</p><br>
+                <p>Thank you for choosing me, loving me, and making every ordinary day feel extraordinary. Here is to celebrating today, our 8-year story, and a lifetime more to come.</p><br>
+                <p>Forever and always yours,</p>
+                <span class="signature">Sudipto ❤️</span>
+            </article>
+        </div>
+
+        <!-- Lightbox Modal using Modern Dialog API -->
+        <dialog id="photoModal" closedby="any" aria-labelledby="modalCaption">
+            <div class="modal-content">
+                <button class="modal-close-btn" onclick="closeLightbox()" aria-label="Close dialog">✕</button>
+                <img id="modalImg" src="" alt="Enlarged Memory">
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
+        </dialog>
+
+        <!-- Footer -->
+        <footer>
+            Crafted with all my love for Sumedha's Birthday &bull; 8 Years &amp; Counting ✨
+        </footer>
+
+    </div>
+
+    <script>
+        /* ==========================================================
+           1. Photo Gallery Data (Using images in directory)
+           ========================================================== */
+        const photos = [
+            { src: 'photo1.jpg', caption: "Your Radiant Smile ✨" },
+            { src: 'photo2.jpg', caption: "8 Years of Us 💑" },
+            { src: 'photo3.jpg', caption: "Every Laugh With You 🌸" },
+            { src: 'photo4.jpg', caption: "My Safe Place Always 💖" },
+            { src: 'photo5.jpg', caption: "Warmth, Peace & Grace ☀️" },
+            { src: 'photo6.jpg', caption: "Here's to Our Forever 🥂" }
+        ];
+
+        let currentPhotoIndex = 1; // Start with couple photo
+
+        function updateMainPhoto(index) {
+            currentPhotoIndex = (index + photos.length) % photos.length;
+            const img = document.getElementById('mainPhoto');
+            const caption = document.getElementById('mainCaption');
+
+            img.style.opacity = '0.3';
+            setTimeout(() => {
+                img.src = photos[currentPhotoIndex].src;
+                caption.innerText = photos[currentPhotoIndex].caption;
+                img.style.opacity = '1';
+            }, 180);
+
+            updateDots();
+        }
+
+        function nextPhoto() {
+            updateMainPhoto(currentPhotoIndex + 1);
+            triggerMiniConfetti();
+        }
+
+        function prevPhoto() {
+            updateMainPhoto(currentPhotoIndex - 1);
+        }
+
+        function initDots() {
+            const container = document.getElementById('dotsContainer');
+            container.innerHTML = '';
+            photos.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `dot ${idx === currentPhotoIndex ? 'active' : ''}`;
+                dot.onclick = () => updateMainPhoto(idx);
+                container.appendChild(dot);
+            });
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentPhotoIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        /* ==========================================================
+           2. Modern Native Dialog Lightbox (with Light-Dismiss fallback)
+           ========================================================== */
+        const photoModal = document.getElementById('photoModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalCaption = document.getElementById('modalCaption');
+
+        function openLightbox(index) {
+            modalImg.src = photos[index].src;
+            modalCaption.innerText = photos[index].caption;
+            photoModal.showModal();
+        }
+
+        function closeLightbox() {
+            photoModal.close();
+        }
+
+        // Modern Web Guidance: Light-dismiss fallback for browsers without native closedby support
+        if (!('closedBy' in HTMLDialogElement.prototype)) {
+            photoModal.addEventListener('click', (event) => {
+                if (event.target !== photoModal) return;
+                const rect = photoModal.getBoundingClientRect();
+                const isDialogContent = (
+                    rect.top <= event.clientY &&
+                    event.clientY <= rect.top + rect.height &&
+                    rect.left <= event.clientX &&
+                    event.clientX <= rect.left + rect.width
+                );
+                if (!isDialogContent) {
+                    photoModal.close();
+                }
+            });
+        }
+
+        /* ==========================================================
+           3. Birthday Cake & Blow Candle Interaction
+           ========================================================== */
+        let candleBlown = false;
+
+        function blowCandle() {
+            const flame = document.getElementById('candleFlame');
+            const status = document.getElementById('cake-status');
+            const btn = document.getElementById('blowBtn');
+
+            if (!candleBlown) {
+                candleBlown = true;
+                flame.classList.add('extinguished');
+                status.innerHTML = "✨ Your Wish is Sent to the Stars! Happy Birthday Sumedha! 🎂✨";
+                btn.innerHTML = "<span>Light the Candle Again 🕯️</span>";
+                
+                // Huge festive confetti explosion
+                fullConfettiBlast();
+            } else {
+                candleBlown = false;
+                flame.classList.remove('extinguished');
+                status.innerText = "Make another Birthday Wish, Sumedha! 🕯️";
+                btn.innerHTML = "<span>Blow Out The Candle 💨</span>";
+            }
+        }
+
+        /* ==========================================================
+           4. Reasons Why I Adore You
+           ========================================================== */
+        const reasons = [
+            "The way your eyes crinkle when you laugh uncontrollably.",
+            "How safe and completely at peace I feel whenever you are near me.",
+            "After 8 whole years, you still give me those very same first butterflies.",
+            "Your endless compassion and the deep care you show for everyone.",
+            "The way you believe in me even when I doubt myself.",
+            "How even a simple walk or grocery run feels like a romantic date with you.",
+            "Your witty humor and the secret silly jokes only the two of us understand.",
+            "You are not only the love of my life, but my truest best friend.",
+            "Your natural elegance, beauty, and the pure warmth of your soul.",
+            "The patience and understanding you have graced our journey with.",
+            "The way your hand fits perfectly inside mine.",
+            "Growing up from youth into adulthood by your side has been my life's greatest honor."
+        ];
+
+        let lastReasonIdx = -1;
+
+        function nextReason() {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * reasons.length);
+            } while (idx === lastReasonIdx);
+            lastReasonIdx = idx;
+
+            const box = document.getElementById('reasonBox');
+            box.style.opacity = '0';
+            setTimeout(() => {
+                box.innerText = `"${reasons[idx]}"`;
+                box.style.opacity = '1';
+            }, 180);
+
+            confetti({
+                particleCount: 30,
+                spread: 60,
+                origin: { y: 0.75 }
+            });
+        }
+
+        /* ==========================================================
+           5. Secret Letter Unfolding
+           ========================================================== */
+        function openLetter() {
+            const envelope = document.getElementById('envelopeCard');
+            const letter = document.getElementById('letter-content');
+            
+            envelope.style.display = 'none';
+            letter.style.display = 'block';
+
+            // Romantic celebratory confetti
+            confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.65 }
+            });
+
+            // Smooth scroll to letter
+            letter.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* ==========================================================
+           6. Confetti Effects
+           ========================================================== */
+        function triggerMiniConfetti() {
+            confetti({
+                particleCount: 20,
+                spread: 45,
+                origin: { y: 0.55 },
+                colors: ['#ff4d6d', '#ff758f', '#ffccd5']
+            });
+        }
+
+        function fullConfettiBlast() {
+            const count = 200;
+            const defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+        }
+
+        /* ==========================================================
+           7. Romantic Web Audio Music Synthesizer (No external mp3 required)
+           ========================================================== */
+        let audioCtx = null;
+        let isPlaying = false;
+        let musicTimer = null;
+
+        // Sweet romantic chime melody notes (frequencies in Hz)
+        const melody = [
+            261.63, 261.63, 293.66, 261.63, 349.23, 329.63, // Happy birthday phrase 1
+            261.63, 261.63, 293.66, 261.63, 392.00, 349.23, // phrase 2
+            261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66, // phrase 3
+            466.16, 466.16, 440.00, 349.23, 392.00, 349.23  // phrase 4
+        ];
+        const durations = [
+            0.4, 0.4, 0.8, 0.8, 0.8, 1.4,
+            0.4, 0.4, 0.8, 0.8, 0.8, 1.4,
+            0.4, 0.4, 0.8, 0.8, 0.8, 0.8, 1.4,
+            0.4, 0.4, 0.8, 0.8, 0.8, 1.6
+        ];
+
+        let noteIndex = 0;
+
+        function playRomanticTone(freq, duration) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            // Warm sine wave with soft bell harmonics
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            // Gentle bell envelope
+            gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        function playNextMelodyNote() {
+            if (!isPlaying) return;
+            const freq = melody[noteIndex];
+            const dur = durations[noteIndex];
+
+            playRomanticTone(freq, dur);
+
+            noteIndex = (noteIndex + 1) % melody.length;
+            musicTimer = setTimeout(playNextMelodyNote, dur * 1000 + 120);
+        }
+
+        function toggleRomanticMusic() {
+            const btn = document.getElementById('musicBtn');
+            const icon = document.getElementById('musicIcon');
+            const text = document.getElementById('musicText');
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (!isPlaying) {
+                isPlaying = true;
+                btn.classList.add('playing');
+                icon.innerText = '⏸️';
+                text.innerText = 'Playing Melody';
+                playNextMelodyNote();
+            } else {
+                isPlaying = false;
+                btn.classList.remove('playing');
+                icon.innerText = '🎵';
+                text.innerText = 'Romantic Melody';
+                clearTimeout(musicTimer);
+            }
+        }
+
+        /* ==========================================================
+           8. Gentle Floating Hearts Canvas Background
+           ========================================================== */
+        const canvas = document.getElementById('hearts-canvas');
+        const ctx = canvas.getContext('2d');
+        let hearts = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Heart {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 50;
+                this.size = Math.random() * 14 + 10;
+                this.speedY = Math.random() * 0.8 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.opacity = Math.random() * 0.35 + 0.15;
+                this.color = ['#ff4d6d', '#ff758f', '#ffb3c1', '#f72585'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -30 || this.x < -30 || this.x > canvas.width + 30) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                const topCurveHeight = this.size * 0.3;
+                ctx.moveTo(this.x, this.y + topCurveHeight);
+                // Top left curve
+                ctx.bezierCurveTo(
+                    this.x, this.y, 
+                    this.x - this.size / 2, this.y, 
+                    this.x - this.size / 2, this.y + topCurveHeight
+                );
+                // Bottom left curve
+                ctx.bezierCurveTo(
+                    this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, 
+                    this.x, this.y + (this.size + topCurveHeight) / 1.3, 
+                    this.x, this.y + this.size
+                );
+                // Bottom right curve
+                ctx.bezierCurveTo(
+                    this.x, this.y + (this.size + topCurveHeight) / 1.3, 
+                    this.x + this.size / 2, this.y + (this.size + topCurveHeight) / 2, 
+                    this.x + this.size / 2, this.y + topCurveHeight
+                );
+                // Top right curve
+                ctx.bezierCurveTo(
+                    this.x + this.size / 2, this.y, 
+                    this.x, this.y, 
+                    this.x, this.y + topCurveHeight
+                );
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 22; i++) {
+            const h = new Heart();
+            h.y = Math.random() * canvas.height; // Distribute on load
+            hearts.push(h);
+        }
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach(h => {
+                h.update();
+                h.draw();
+            });
+            requestAnimationFrame(animateHearts);
+        }
+        animateHearts();
+
+        /* ==========================================================
+           9. Window Initialization
+           ========================================================== */
+        window.addEventListener('load', () => {
+            initDots();
+
+            // Initial celebration shower
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    spread: 75,
+                    origin: { y: 0.6 }
+                });
+            }, 400);
+        });
+    </script>
+</body>
+</html>
